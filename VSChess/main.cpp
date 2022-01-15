@@ -8,65 +8,23 @@
 #include "queen.h"
 #include "rook.h"
 #include "chesspiece.h"
+#include "boardgrid.h"
 
 /* use https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/SCD_algebraic_notation.svg/1200px-SCD_algebraic_notation.svg.png
 for reference of chess board */
 
 std::vector<ChessPiece*> ChessPieces;
 std::vector<std::vector<BoardGrid>> Board;
-std::vector<BoardGrid*> firstRow;
+/*std::vector<BoardGrid*> firstRow;
 std::vector<BoardGrid*> secondRow;
 std::vector<BoardGrid*> thirdRow;
 std::vector<BoardGrid*> fourthRow;
 std::vector<BoardGrid*> fifthRow;
 std::vector<BoardGrid*> sixthRow;
 std::vector<BoardGrid*> seventhRow;
-std::vector<BoardGrid*> eighthRow;
+std::vector<BoardGrid*> eighthRow;*/
 
 
-class BoardGrid {
-private:
-    bool occupied;
-    int verticalPosition;
-    char horizontalPosition;
-    ChessPiece* type = nullptr;
-public:
-    std::string ownLocation = horizontalPosition + std::to_string(verticalPosition);
-    int getvertPos() {
-        return verticalPosition;
-    }
-    void setvertPos(int i) {
-        verticalPosition = i;
-    }
-    int gethoriPos() {
-        return horizontalPosition;
-    }
-    void sethoriPos(int i) {
-        horizontalPosition = i;
-    }
-};
-
-void constructGrid()
-{
-    BoardGrid* A1; A1->setvertPos(1); A1->sethoriPos('a'); firstRow.push_back(A1);
-    BoardGrid* A2; A2->setvertPos(2); A2->sethoriPos('a'); firstRow.push_back(A2);
-    BoardGrid* A3; A3->setvertPos(3); A3->sethoriPos('a'); firstRow.push_back(A3);
-    BoardGrid* A4; A4->setvertPos(4); A4->sethoriPos('a'); firstRow.push_back(A4);
-    BoardGrid* A5; A5->setvertPos(5); A5->sethoriPos('a'); firstRow.push_back(A5);
-    BoardGrid* A6; A6->setvertPos(6); A6->sethoriPos('a'); firstRow.push_back(A6);
-    BoardGrid* A7; A7->setvertPos(7); A7->sethoriPos('a'); firstRow.push_back(A7);
-    BoardGrid* A8; A8->setvertPos(8); A8->sethoriPos('a'); firstRow.push_back(A8);
-    BoardGrid* B1; B1->setvertPos(1); B1->sethoriPos('b'); secondRow.push_back(B1);
-    BoardGrid* B2; B2->setvertPos(2); B2->sethoriPos('b'); secondRow.push_back(B2);
-    BoardGrid* B3; B3->setvertPos(3); B3->sethoriPos('b'); secondRow.push_back(B3);
-    BoardGrid* B4; B4->setvertPos(4); B4->sethoriPos('b'); secondRow.push_back(B4);
-    BoardGrid* B5; B5->setvertPos(5); B5->sethoriPos('b'); secondRow.push_back(B5);
-    BoardGrid* B6; B6->setvertPos(6); B6->sethoriPos('b'); secondRow.push_back(B6);
-    BoardGrid* B7; B7->setvertPos(7); B7->sethoriPos('b'); secondRow.push_back(B7);
-    BoardGrid* B8; B8->setvertPos(8); B8->sethoriPos('b'); secondRow.push_back(B8);
-
-
-}
 void constructWhiteTeam()
 {
     Rook* whiteRook1 = new Rook(); ChessPieces.push_back(whiteRook1);
@@ -142,6 +100,23 @@ void constructBlackTeam()
     blackPawn7->setcurrentLocation("g7");
     blackPawn8->setcurrentLocation("h7");
 }
+int vertPostoypos(char a)
+{
+    return int(a) - 97;
+}
+void constructGrid()
+{
+    BoardGrid Board[8][8];
+    Board[std::atoi(&(ChessPieces[0]->getcurrentLocation())[1]) - 1][vertPostoypos((ChessPieces[0]->getcurrentLocation())[0])].setType(ChessPieces[0]);
+    std::cout << Board[std::atoi(&(ChessPieces[0]->getcurrentLocation())[1]) - 1]
+                      [vertPostoypos((ChessPieces[0]->getcurrentLocation())[0])]
+                      .getType()->getpieceRepresentation();
+    Board[std::atoi(&(ChessPieces[1]->getcurrentLocation())[1]) - 1][vertPostoypos((ChessPieces[1]->getcurrentLocation())[0])].setType(ChessPieces[1]);
+    std::cout << Board[std::atoi(&(ChessPieces[1]->getcurrentLocation())[1]) - 1]
+                      [vertPostoypos((ChessPieces[1]->getcurrentLocation())[0])]
+                      .getType()->getpieceRepresentation();
+}
+
 int main()
 {
     /*std::vector<std::vector<BoardGrid>> Board{
@@ -152,7 +127,10 @@ int main()
 
     constructWhiteTeam();
     constructBlackTeam();
+    constructGrid();
+    std::cout << "\n";
     std::cout << ChessPieces.size();
+    std::cout << "\n";
     std::cout << ChessPieces[1]->getpieceRepresentation();
     //memory cleanup
     for (int i = 0; i < ChessPieces.size(); i++)
