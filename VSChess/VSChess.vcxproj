@@ -142,6 +142,7 @@
     <ClCompile Include="bishop.cpp" />
     <ClCompile Include="boardgrid.cpp" />
     <ClCompile Include="chesspiece.cpp" />
+    <ClCompile Include="empty.cpp" />
     <ClCompile Include="king.cpp" />
     <ClCompile Include="knight.cpp" />
     <ClCompile Include="main.cpp" />
@@ -153,6 +154,7 @@
     <ClInclude Include="bishop.h" />
     <ClInclude Include="boardgrid.h" />
     <ClInclude Include="chesspiece.h" />
+    <ClInclude Include="empty.h" />
     <ClInclude Include="king.h" />
     <ClInclude Include="knight.h" />
     <ClInclude Include="pawn.h" />

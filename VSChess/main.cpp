@@ -9,6 +9,7 @@
 #include "rook.h"
 #include "chesspiece.h"
 #include "boardgrid.h"
+#include "empty.h"
 
 /* use https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/SCD_algebraic_notation.svg/1200px-SCD_algebraic_notation.svg.png
 for reference of chess board */
@@ -24,13 +25,76 @@ std::vector<BoardGrid*> sixthRow;
 std::vector<BoardGrid*> seventhRow;
 std::vector<BoardGrid*> eighthRow;*/
 
-class Empty : public ChessPiece {
-public:
-    Empty() {
-        pieceRepresentation = ' ';
-    }
-};
 
+
+void constructEmptySpaces()
+{
+    Empty* emptySpace1 = new Empty(); ChessPieces.push_back(emptySpace1);
+    Empty* emptySpace2 = new Empty(); ChessPieces.push_back(emptySpace2);
+    Empty* emptySpace3 = new Empty(); ChessPieces.push_back(emptySpace3);
+    Empty* emptySpace4 = new Empty(); ChessPieces.push_back(emptySpace4);
+    Empty* emptySpace5 = new Empty(); ChessPieces.push_back(emptySpace5);
+    Empty* emptySpace6 = new Empty(); ChessPieces.push_back(emptySpace6);
+    Empty* emptySpace7 = new Empty(); ChessPieces.push_back(emptySpace7);
+    Empty* emptySpace8 = new Empty(); ChessPieces.push_back(emptySpace8);
+    Empty* emptySpace9 = new Empty(); ChessPieces.push_back(emptySpace9);
+    Empty* emptySpace10 = new Empty(); ChessPieces.push_back(emptySpace10);
+    Empty* emptySpace11 = new Empty(); ChessPieces.push_back(emptySpace11);
+    Empty* emptySpace12 = new Empty(); ChessPieces.push_back(emptySpace12);
+    Empty* emptySpace13 = new Empty(); ChessPieces.push_back(emptySpace13);
+    Empty* emptySpace14 = new Empty(); ChessPieces.push_back(emptySpace14);
+    Empty* emptySpace15 = new Empty(); ChessPieces.push_back(emptySpace15);
+    Empty* emptySpace16 = new Empty(); ChessPieces.push_back(emptySpace16);
+    Empty* emptySpace17 = new Empty(); ChessPieces.push_back(emptySpace17);
+    Empty* emptySpace18 = new Empty(); ChessPieces.push_back(emptySpace18);
+    Empty* emptySpace19 = new Empty(); ChessPieces.push_back(emptySpace19);
+    Empty* emptySpace20 = new Empty(); ChessPieces.push_back(emptySpace20);
+    Empty* emptySpace21 = new Empty(); ChessPieces.push_back(emptySpace21);
+    Empty* emptySpace22 = new Empty(); ChessPieces.push_back(emptySpace22);
+    Empty* emptySpace23 = new Empty(); ChessPieces.push_back(emptySpace23);
+    Empty* emptySpace24 = new Empty(); ChessPieces.push_back(emptySpace24);
+    Empty* emptySpace25 = new Empty(); ChessPieces.push_back(emptySpace25);
+    Empty* emptySpace26 = new Empty(); ChessPieces.push_back(emptySpace26);
+    Empty* emptySpace27 = new Empty(); ChessPieces.push_back(emptySpace27);
+    Empty* emptySpace28 = new Empty(); ChessPieces.push_back(emptySpace28);
+    Empty* emptySpace29 = new Empty(); ChessPieces.push_back(emptySpace29);
+    Empty* emptySpace30 = new Empty(); ChessPieces.push_back(emptySpace30);
+    Empty* emptySpace31 = new Empty(); ChessPieces.push_back(emptySpace31);
+    Empty* emptySpace32 = new Empty(); ChessPieces.push_back(emptySpace32);
+    //initialize starting position
+    emptySpace1->setcurrentLocation("a3");
+    emptySpace2->setcurrentLocation("b3");
+    emptySpace3->setcurrentLocation("c3");
+    emptySpace4->setcurrentLocation("d3");
+    emptySpace5->setcurrentLocation("e3");
+    emptySpace6->setcurrentLocation("f3");
+    emptySpace7->setcurrentLocation("g3");
+    emptySpace8->setcurrentLocation("h3");
+    emptySpace9->setcurrentLocation("a4");
+    emptySpace10->setcurrentLocation("b4");
+    emptySpace11->setcurrentLocation("c4");
+    emptySpace12->setcurrentLocation("d4");
+    emptySpace13->setcurrentLocation("e4");
+    emptySpace14->setcurrentLocation("f4");
+    emptySpace15->setcurrentLocation("g4");
+    emptySpace16->setcurrentLocation("h4");
+    emptySpace17->setcurrentLocation("a5");
+    emptySpace18->setcurrentLocation("b5");
+    emptySpace19->setcurrentLocation("c5");
+    emptySpace20->setcurrentLocation("d5");
+    emptySpace21->setcurrentLocation("e5");
+    emptySpace22->setcurrentLocation("f5");
+    emptySpace23->setcurrentLocation("g5");
+    emptySpace24->setcurrentLocation("h5");
+    emptySpace25->setcurrentLocation("a6");
+    emptySpace26->setcurrentLocation("b6");
+    emptySpace27->setcurrentLocation("c6");
+    emptySpace28->setcurrentLocation("d6");
+    emptySpace29->setcurrentLocation("e6");
+    emptySpace30->setcurrentLocation("f6");
+    emptySpace31->setcurrentLocation("g6");
+    emptySpace32->setcurrentLocation("h6");
+}
 void constructWhiteTeam()
 {
     Rook* whiteRook1 = new Rook(); ChessPieces.push_back(whiteRook1);
@@ -173,7 +237,7 @@ int main()
     }*/
     //std::vector<BoardGrid> firstRow(A1, A2, A3, A4, A5, A6, A7, A8);
 
-
+    constructEmptySpaces();
     constructWhiteTeam();
     constructBlackTeam();
     constructGrid();
