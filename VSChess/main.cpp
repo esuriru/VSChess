@@ -137,7 +137,8 @@ void constructGrid()
             std::cout << "\n";
         }
         if (Board[currentxvalue - 1][currentyvalue].getType() != nullptr) {
-            std::cout << currentxvalue - 1 << " " << currentyvalue << "\n";
+            int chessAlgebraicNotationY = 8 - currentyvalue;
+            std::cout << currentxvalue - 1 << " " << chessAlgebraicNotationY << "\n";
             std::cout << Board[currentxvalue - 1][currentyvalue].getType()->getpieceRepresentation();
             std::cout << "\n";
 
