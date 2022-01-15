@@ -13,13 +13,23 @@
 for reference of chess board */
 
 std::vector<ChessPiece*> ChessPieces;
+std::vector<std::vector<BoardGrid>> Board;
 std::vector<BoardGrid*> firstRow;
+std::vector<BoardGrid*> secondRow;
+std::vector<BoardGrid*> thirdRow;
+std::vector<BoardGrid*> fourthRow;
+std::vector<BoardGrid*> fifthRow;
+std::vector<BoardGrid*> sixthRow;
+std::vector<BoardGrid*> seventhRow;
+std::vector<BoardGrid*> eighthRow;
+
 
 class BoardGrid {
 private:
     bool occupied;
     int verticalPosition;
     char horizontalPosition;
+    ChessPiece* type = nullptr;
 public:
     std::string ownLocation = horizontalPosition + std::to_string(verticalPosition);
     int getvertPos() {
@@ -39,21 +49,21 @@ public:
 void constructGrid()
 {
     BoardGrid* A1; A1->setvertPos(1); A1->sethoriPos('a'); firstRow.push_back(A1);
-    BoardGrid* A2; A2->setvertPos(2); A2->sethoriPos('a'); firstRow.push_back(A1);
-    BoardGrid* A3; A3->setvertPos(3); A3->sethoriPos('a'); firstRow.push_back(A1);
-    BoardGrid* A4; A4->setvertPos(4); A4->sethoriPos('a'); firstRow.push_back(A1);
-    BoardGrid* A5; A5->setvertPos(5); A5->sethoriPos('a'); firstRow.push_back(A1);
-    BoardGrid* A6; A6->setvertPos(6); A6->sethoriPos('a'); firstRow.push_back(A1);
-    BoardGrid* A7; A7->setvertPos(7); A7->sethoriPos('a'); firstRow.push_back(A1);
-    BoardGrid* A8; A8->setvertPos(8); A8->sethoriPos('a'); firstRow.push_back(A1);
-    BoardGrid* B1; B1->setvertPos(1); B1->sethoriPos('b');
-    BoardGrid* B2; B2->setvertPos(2); B2->sethoriPos('b');
-    BoardGrid* B3; B3->setvertPos(3); B3->sethoriPos('b');
-    BoardGrid* B4; B4->setvertPos(4); B4->sethoriPos('b');
-    BoardGrid* B5; B5->setvertPos(5); B5->sethoriPos('b');
-    BoardGrid* B6; B6->setvertPos(6); B6->sethoriPos('b');
-    BoardGrid* B7; B7->setvertPos(7); B7->sethoriPos('b');
-    BoardGrid* B8; B8->setvertPos(8); B8->sethoriPos('b');
+    BoardGrid* A2; A2->setvertPos(2); A2->sethoriPos('a'); firstRow.push_back(A2);
+    BoardGrid* A3; A3->setvertPos(3); A3->sethoriPos('a'); firstRow.push_back(A3);
+    BoardGrid* A4; A4->setvertPos(4); A4->sethoriPos('a'); firstRow.push_back(A4);
+    BoardGrid* A5; A5->setvertPos(5); A5->sethoriPos('a'); firstRow.push_back(A5);
+    BoardGrid* A6; A6->setvertPos(6); A6->sethoriPos('a'); firstRow.push_back(A6);
+    BoardGrid* A7; A7->setvertPos(7); A7->sethoriPos('a'); firstRow.push_back(A7);
+    BoardGrid* A8; A8->setvertPos(8); A8->sethoriPos('a'); firstRow.push_back(A8);
+    BoardGrid* B1; B1->setvertPos(1); B1->sethoriPos('b'); secondRow.push_back(B1);
+    BoardGrid* B2; B2->setvertPos(2); B2->sethoriPos('b'); secondRow.push_back(B2);
+    BoardGrid* B3; B3->setvertPos(3); B3->sethoriPos('b'); secondRow.push_back(B3);
+    BoardGrid* B4; B4->setvertPos(4); B4->sethoriPos('b'); secondRow.push_back(B4);
+    BoardGrid* B5; B5->setvertPos(5); B5->sethoriPos('b'); secondRow.push_back(B5);
+    BoardGrid* B6; B6->setvertPos(6); B6->sethoriPos('b'); secondRow.push_back(B6);
+    BoardGrid* B7; B7->setvertPos(7); B7->sethoriPos('b'); secondRow.push_back(B7);
+    BoardGrid* B8; B8->setvertPos(8); B8->sethoriPos('b'); secondRow.push_back(B8);
 
 
 }
@@ -137,13 +147,9 @@ int main()
     /*std::vector<std::vector<BoardGrid>> Board{
         {a8, b8, c8, d8, e8, f8, g8, h8},
     }*/
-    std::vector<std::vector<BoardGrid>> Board;
     //std::vector<BoardGrid> firstRow(A1, A2, A3, A4, A5, A6, A7, A8);
 
-    for (std::vector<BoardGrid> x : Board)
-    {
-        break;
-    }
+
     constructWhiteTeam();
     constructBlackTeam();
     std::cout << ChessPieces.size();
