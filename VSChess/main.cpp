@@ -24,6 +24,12 @@ std::vector<BoardGrid*> sixthRow;
 std::vector<BoardGrid*> seventhRow;
 std::vector<BoardGrid*> eighthRow;*/
 
+class Empty : public ChessPiece {
+public:
+    Empty() {
+        pieceRepresentation = ' ';
+    }
+};
 
 void constructWhiteTeam()
 {
@@ -106,7 +112,43 @@ int vertPostoypos(char a)
 }
 void constructGrid()
 {
+    int emptySpaces;
+    int currentxvalue = 0;
+    int currentyvalue = 0;
     BoardGrid Board[8][8];
+    for (int i = 0; i < ChessPieces.size(); i++)
+    {   
+        int refx = std::atoi(&(ChessPieces[i]->getcurrentLocation())[1]) - 1;
+        int refy = vertPostoypos((ChessPieces[i]->getcurrentLocation())[0]);
+        Board[refy][refx].setType(ChessPieces[i]);
+        /*
+        std::cout << Board[refx][refy].getType()->getpieceRepresentation();
+        std::cout << "\n" << refx << "\n" << refy << "\n";
+        */
+        
+       
+    }
+    for (int i = 0; i < ChessPieces.size(); i++)
+    {
+        currentxvalue++;
+        if (currentxvalue == 9) {
+            currentyvalue++;
+            currentxvalue -= 8;
+            std::cout << "\n";
+        }
+        if (Board[currentxvalue - 1][currentyvalue].getType() != nullptr) {
+            std::cout << currentxvalue - 1 << " " << currentyvalue << "\n";
+            std::cout << Board[currentxvalue - 1][currentyvalue].getType()->getpieceRepresentation();
+            std::cout << "\n";
+
+        }
+        else {
+            std::cout << "  ";
+        }
+    }
+    
+
+    /*
     Board[std::atoi(&(ChessPieces[0]->getcurrentLocation())[1]) - 1][vertPostoypos((ChessPieces[0]->getcurrentLocation())[0])].setType(ChessPieces[0]);
     std::cout << Board[std::atoi(&(ChessPieces[0]->getcurrentLocation())[1]) - 1]
                       [vertPostoypos((ChessPieces[0]->getcurrentLocation())[0])]
@@ -115,7 +157,13 @@ void constructGrid()
     std::cout << Board[std::atoi(&(ChessPieces[1]->getcurrentLocation())[1]) - 1]
                       [vertPostoypos((ChessPieces[1]->getcurrentLocation())[0])]
                       .getType()->getpieceRepresentation();
+    Board[std::atoi(&(ChessPieces[2]->getcurrentLocation())[1]) - 1][vertPostoypos((ChessPieces[2]->getcurrentLocation())[0])].setType(ChessPieces[2]);
+    std::cout << Board[std::atoi(&(ChessPieces[2]->getcurrentLocation())[1]) - 1]
+                      [vertPostoypos((ChessPieces[2]->getcurrentLocation())[0])]
+                      .getType()->getpieceRepresentation();
+    */                  
 }
+void MovePiece(BoardGrid from, BoardGrid to);
 
 int main()
 {
