@@ -157,6 +157,7 @@
     <ClInclude Include="empty.h" />
     <ClInclude Include="king.h" />
     <ClInclude Include="knight.h" />
+    <ClInclude Include="main.h" />
     <ClInclude Include="pawn.h" />
     <ClInclude Include="queen.h" />
     <ClInclude Include="rook.h" />

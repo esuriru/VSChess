@@ -11,6 +11,7 @@
 #include "boardgrid.h"
 #include "empty.h"
 
+
 /* use https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/SCD_algebraic_notation.svg/1200px-SCD_algebraic_notation.svg.png
 for reference of chess board */
 
@@ -170,7 +171,7 @@ void constructBlackTeam()
     blackPawn7->setcurrentLocation("g7");
     blackPawn8->setcurrentLocation("h7");
 }
-int vertPostoypos(char a)
+int horiPostoxpos(char a)
 {
     return int(a) - 97;
 }
@@ -182,18 +183,15 @@ void constructGrid()
     BoardGrid Board[8][8];
     for (int i = 0; i < ChessPieces.size(); i++)
     {   
+        //make every piece(including empty spaces) exist
         int refx = std::atoi(&(ChessPieces[i]->getcurrentLocation())[1]) - 1;
-        int refy = vertPostoypos((ChessPieces[i]->getcurrentLocation())[0]);
+        int refy = horiPostoxpos((ChessPieces[i]->getcurrentLocation())[0]);
         Board[refy][refx].setType(ChessPieces[i]);
-        /*
-        std::cout << Board[refx][refy].getType()->getpieceRepresentation();
-        std::cout << "\n" << refx << "\n" << refy << "\n";
-        */
-        
-       
+         
     }
     for (int i = 0; i < ChessPieces.size(); i++)
     {
+        //arrange them all into a 2d grid
         currentxvalue++;
         if (currentxvalue == 9) {
             currentyvalue++;
@@ -202,49 +200,67 @@ void constructGrid()
         }
         if (Board[currentxvalue - 1][currentyvalue].getType() != nullptr) {
             int chessAlgebraicNotationY = 8 - currentyvalue;
-            std::cout << currentxvalue - 1 << " " << chessAlgebraicNotationY << "\n";
+            //std::cout << currentxvalue - 1 << " " << chessAlgebraicNotationY << "\n";
+
+            if (currentxvalue == 1) { //if it is a new line, create a reference of vertical position
+                std::cout << chessAlgebraicNotationY << " ";
+            }
+            else {
+                std::cout << "  ";
+            } 
             std::cout << Board[currentxvalue - 1][currentyvalue].getType()->getpieceRepresentation();
-            std::cout << "\n";
+            std::cout << "  ";
+            if (currentxvalue - 1 == 7) { //create a new line if the last column has been set
+                std::cout << "\n";
+            }
 
         }
         else {
             std::cout << "  ";
         }
     }
-    
-
-    /*
-    Board[std::atoi(&(ChessPieces[0]->getcurrentLocation())[1]) - 1][vertPostoypos((ChessPieces[0]->getcurrentLocation())[0])].setType(ChessPieces[0]);
-    std::cout << Board[std::atoi(&(ChessPieces[0]->getcurrentLocation())[1]) - 1]
-                      [vertPostoypos((ChessPieces[0]->getcurrentLocation())[0])]
-                      .getType()->getpieceRepresentation();
-    Board[std::atoi(&(ChessPieces[1]->getcurrentLocation())[1]) - 1][vertPostoypos((ChessPieces[1]->getcurrentLocation())[0])].setType(ChessPieces[1]);
-    std::cout << Board[std::atoi(&(ChessPieces[1]->getcurrentLocation())[1]) - 1]
-                      [vertPostoypos((ChessPieces[1]->getcurrentLocation())[0])]
-                      .getType()->getpieceRepresentation();
-    Board[std::atoi(&(ChessPieces[2]->getcurrentLocation())[1]) - 1][vertPostoypos((ChessPieces[2]->getcurrentLocation())[0])].setType(ChessPieces[2]);
-    std::cout << Board[std::atoi(&(ChessPieces[2]->getcurrentLocation())[1]) - 1]
-                      [vertPostoypos((ChessPieces[2]->getcurrentLocation())[0])]
-                      .getType()->getpieceRepresentation();
-    */                  
+                  
 }
-void MovePiece(BoardGrid from, BoardGrid to);
+void MovePiece(BoardGrid from, BoardGrid to) {
+    to.getType()->setcurrentLocation(from.getType()->getcurrentLocation());
+    if (from.getType()->getpieceRepresentation() == ' ') {
+        from.getType()->setcurrentLocation(to.getType()->getcurrentLocation());
+    }
+    constructGrid();
+}
 
+void startGame() {
+    //input format e.g: "a1->a2"
+    //white starts first
+    std::string playerinput;
+    getline(std::cin, playerinput);
+    try {
+        std::string home;
+        int homerefx = std::atoi(&(playerinput[1])) - 1;
+        int homerefy = horiPostoxpos(playerinput[0]);
+        int destinationrefx = std::atoi(&(playerinput[5])) - 1;
+        int destinationrefy = horiPostoxpos(playerinput[4]);
+        MovePiece(Board[homerefy][homerefx], Board[destinationrefy][destinationrefx]);
+
+
+    }
+    catch(...){
+        std::cout << "sorry, it could not be done"; //need to change
+    }
+
+}
 int main()
 {
-    /*std::vector<std::vector<BoardGrid>> Board{
-        {a8, b8, c8, d8, e8, f8, g8, h8},
-    }*/
-    //std::vector<BoardGrid> firstRow(A1, A2, A3, A4, A5, A6, A7, A8);
-
+    //create upper grid reference (chess algebraic notation)
+    std::cout << "  " << "a" << "    " << "b" << "    " << "c" << "    " << "d" << "    " << "e" << "    " << "f" << "    "
+        << "g" << "    " << "h";
+    std::cout << "\n";
     constructEmptySpaces();
     constructWhiteTeam();
     constructBlackTeam();
     constructGrid();
     std::cout << "\n";
-    std::cout << ChessPieces.size();
-    std::cout << "\n";
-    std::cout << ChessPieces[1]->getpieceRepresentation();
+    startGame();
     //memory cleanup
     for (int i = 0; i < ChessPieces.size(); i++)
     {

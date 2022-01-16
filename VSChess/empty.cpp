@@ -4,5 +4,5 @@
 
 Empty::Empty()
 {
-	pieceRepresentation = 'e';
+	pieceRepresentation = ' ';
 }
